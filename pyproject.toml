@@ -1,0 +1,42 @@
+[project]
+name = "rainbow"
+version = "1.0"
+description = "Rainbow DQN"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch==2.7.1",
+    "torchvision",
+    "torchaudio",
+    "numpy",
+    "gymnasium==0.29.1",
+    "ale-py==0.8.1",
+    "autorom[accept-rom-license]",
+    "nevergrad",
+    "matplotlib",
+    "opencv-python",
+    "scipy",
+    "pandas",
+    "tqdm",
+    "lz4",
+    "pygame",
+    "shimmy",
+    "mambapy",
+    "envpool",
+    "vizdoom",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchaudio = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
