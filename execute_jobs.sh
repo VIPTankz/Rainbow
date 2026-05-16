@@ -10,7 +10,8 @@ partitions=("a100" "swarm_a100" "swarm_h100" "swarm_l4" "quad_h200" "dual_h200")
 
 pick_resources() {
   case "$1" in
-    a100|swarm_a100|swarm_h100) echo "24 60:00:00"   ;; # 24 CPUs, 60h
+    a100)                       echo "24 60:00:00"   ;; # 24 CPUs, 60h
+    swarm_a100|swarm_h100)      echo "24 120:00:00"  ;; # 24 CPUs, 120h
     swarm_l4)                   echo "12 120:00:00"  ;; # 12 CPUs, 120h
     quad_h200)                  echo "12 60:00:00"   ;; # 12 CPUs, 60h
     dual_h200)                  echo "24 60:00:00"   ;; # 24 CPUs, 60h
