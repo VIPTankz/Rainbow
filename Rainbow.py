@@ -972,11 +972,6 @@ def main():
         print(f"Created directory: {new_dir_name}")
         os.chdir(new_dir_name)
 
-    # create blank evaluation file
-    fname = agent_name + "Evaluation.npy"
-    if not testing:
-        np.save(fname, np.zeros((args.frames // 1000000, num_eval_episodes)))
-
     if testing:
         # goes easy on the PC when debugging
         num_envs = 8
@@ -991,6 +986,13 @@ def main():
         n_steps = total_steps
         eval_every = 200000
     next_eval = eval_every
+
+    # create blank evaluation file — size off the actual eval cadence so we never overflow.
+    # +2 covers the end-of-training eval and rounding from num_envs overshooting next_eval.
+    fname = agent_name + "Evaluation.npy"
+    if not testing:
+        num_eval_slots = n_steps // eval_every + 2
+        np.save(fname, np.zeros((num_eval_slots, num_eval_episodes)))
 
     print("Currently Playing Game: " + str(game))
 
